@@ -152,7 +152,7 @@ func (c *Color) Set() *Color {
 		return c
 	}
 
-	fmt.Fprintf(Output, c.format())
+	fmt.Fprint(Output, c.format())
 	return c
 }
 
@@ -170,7 +170,7 @@ func (c *Color) SetWriter(w io.Writer) *Color {
 		return c
 	}
 
-	fmt.Fprintf(w, c.format())
+	fmt.Fprint(w, c.format())
 	return c
 }
 
@@ -192,12 +192,6 @@ func (c *Color) UnsetWriter(w io.Writer) {
 func (c *Color) Add(value ...Attribute) *Color {
 	c.params = append(c.params, value...)
 	return c
-}
-
-func (c *Color) prepend(value Attribute) {
-	c.params = append(c.params, 0)
-	copy(c.params[1:], c.params[0:])
-	c.params[0] = value
 }
 
 // Fprint formats using the default formats for its operands and writes to w.
